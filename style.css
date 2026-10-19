@@ -1,0 +1,121 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f4f6f8;
+  color: #16302B;
+}
+
+/* ==========================================
+   TASK 1: TRAIN TICKET BOOKING STYLES
+   ========================================== */
+.t1-card {
+  background-color: #ffffff;
+  border-radius: 24px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.t1-header {
+  background-color: #0F6B5F;
+  color: #ffffff;
+  padding: 16px 24px;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 24px;
+}
+
+/* Переключатель "One way / Round trip" */
+.t1-segmented-control {
+  background-color: #e9ecef;
+  border-radius: 30px;
+  padding: 4px;
+  display: inline-flex;
+  margin-bottom: 20px;
+}
+
+.t1-segmented-control input[type="radio"] {
+  display: none;
+}
+
+.t1-segmented-control label {
+  padding: 8px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  margin-bottom: 0;
+}
+
+.t1-segmented-control input[type="radio"]:checked + label {
+  background-color: #0F6B5F;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.t1-input {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+/* Кнопки Task 1 */
+.t1-btn-primary {
+  background-color: #F2A93B;
+  color: #16302B;
+  font-weight: 700;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 30px;
+}
+
+.t1-btn-primary:hover {
+  background-color: #e0982d;
+}
+
+.t1-btn-outline {
+  background-color: transparent;
+  border: 2px solid #dee2e6;
+  color: #16302B;
+  font-weight: 600;
+  border-radius: 30px;
+  padding: 10px 30px;
+}
+
+/* Порядок кнопок на мобильных устройствах (375px) */
+@media (max-width: 576px) {
+  .t1-buttons-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .t1-btn-primary {
+    order: 1;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .t1-btn-outline {
+    order: 2;
+    width: 100%;
+  }
+}
+
+/* ==========================================
+   TASK 2: AITU HACK VALIDATION (:user-invalid)
+   ========================================== */
+.t2-form input:user-invalid,
+.t2-form select:user-invalid,
+.t2-form textarea:user-invalid {
+  border-color: #dc3545;
+  padding-right: calc(1.5em + 0.75rem);
+  background-image: url("data:image/svg+xml,%3cSVG xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3Cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5zM6 8.2a.6.6 0 100-1.2.6.6 0 000 1.2z'/%3e%3c/SVG%3e");
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.t2-form input:user-invalid ~ .invalid-feedback,
+.t2-form select:user-invalid ~ .invalid-feedback,
+.t2-form textarea:user-invalid ~ .invalid-feedback {
+  display: block;
+}
