@@ -1,0 +1,252 @@
+/* Главная страница: те же цвета и шрифт, что в Task 1 */
+:root {
+  --green: #0F6B5F;
+  --orange: #F2A93B;
+  --dark: #16302B;
+  --field: #F4F7F5;
+  --line: #E6EFEC;
+}
+
+.home {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--line);
+  color: var(--dark);
+}
+
+/* ---------- Шапка ---------- */
+/* Градиент из зелёных цветов задания + мягкое бирюзовое пятно слева снизу.
+   Несколько фонов через запятую: первый рисуется сверху */
+.home-hero {
+  background:
+    radial-gradient(circle at 0% 100%, rgba(79, 194, 174, 0.35), transparent 45%),
+    linear-gradient(135deg, #138A79 0%, var(--green) 45%, var(--dark) 100%);
+  color: #fff;
+  padding-bottom: 4rem;            /* место, на которое "заезжают" карточки */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Оранжевый круг в правом верхнем углу (декор, без лишнего HTML).
+   Часть круга уходит за край, overflow: hidden у шапки её обрезает */
+.home-hero::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: var(--orange);
+  box-shadow: 0 0 0 28px rgba(242, 169, 59, 0.25), 0 0 0 56px rgba(242, 169, 59, 0.1);
+}
+
+@media (min-width: 992px) {
+  .home-hero::before {
+    top: -120px;
+    right: 6%;
+    width: 360px;
+    height: 360px;
+  }
+}
+
+/* Пунктирная "железная дорога" внизу шапки — отсылка к Task 1 */
+.home-hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 1.25rem;
+  height: 4px;
+  background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.25) 0 24px, transparent 24px 40px);
+}
+
+.home-hero .container {
+  position: relative;              /* текст поверх пунктира */
+  z-index: 1;
+}
+
+.home-chip.home-chip-accent {
+  background-color: var(--orange);
+  border-color: var(--orange);
+  color: var(--dark);
+}
+
+/* ---------- Плитки с цифрами ---------- */
+.home-stats {
+  max-width: 40rem;
+}
+
+.home-stat {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 0.9rem 1rem;
+  height: 100%;
+}
+
+.home-stat b {
+  display: block;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--orange);
+}
+
+.home-stat span {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.home-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.home-title {
+  font-weight: 800;
+  font-size: clamp(2rem, 6vw, 3.25rem);
+}
+
+.home-lead {
+  max-width: 40rem;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.home-chip {
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50rem;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Карточки немного залезают на зелёную шапку */
+.home-main {
+  margin-top: -4rem;
+}
+
+/* ---------- Карточки задач ---------- */
+.home-card {
+  border: 0;
+  border-radius: 20px;
+  overflow: hidden;                 /* скругляет углы картинки */
+  box-shadow: 0 10px 30px rgba(22, 48, 43, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.home-card:hover,
+.home-card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(22, 48, 43, 0.2);
+}
+
+/* Превью: цветной фон, а скриншот лежит на нём как окно */
+.home-preview {
+  padding: 1.25rem 1.25rem 0;
+  background-color: var(--preview-bg);
+}
+
+.home-preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -4px 20px rgba(22, 48, 43, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.home-card:hover .home-preview img {
+  transform: scale(1.03);
+}
+
+/* У каждой карточки свой цвет: меняется только переменная */
+.home-card-green  { --preview-bg: #CFE6DF; --card-accent: var(--green); }
+.home-card-orange { --preview-bg: #FBE3BC; --card-accent: #C77A0A; }
+.home-card-sand   { --preview-bg: #EADFCF; --card-accent: #8A5A2B; }
+
+/* card-body как flex-колонка: кнопка всегда прижата к низу карточки */
+.home-card .card-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.home-link {
+  margin-top: auto;
+}
+
+.home-num {
+  color: var(--card-accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.home-card .card-title {
+  font-weight: 700;
+}
+
+.home-card .card-text {
+  color: #4a5d57;
+}
+
+/* Список тегов в строку */
+.home-tags {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.home-tags li {
+  background-color: var(--field);
+  border: 1px solid var(--line);
+  border-radius: 50rem;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.home-link {
+  display: inline-block;
+  background-color: var(--orange);
+  color: var(--dark);
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 50rem;
+  padding: 0.55rem 1.4rem;
+}
+
+.home-link:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: 3px;
+}
+
+/* ---------- Подвал ---------- */
+.home-footer {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  text-align: center;
+}
+
+.home-footer a {
+  color: var(--green);
+  font-weight: 600;
+}
+
+/* Без анимации для тех, кто её отключил в системе */
+@media (prefers-reduced-motion: reduce) {
+  .home-card { transition: none; }
+  .home-card:hover,
+  .home-card:focus-within,
+  .home-card:hover .home-preview img { transform: none; }
+}
