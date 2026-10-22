@@ -1,0 +1,178 @@
+/* =========================================================
+   TASK 1 — Book a train ticket
+   Палитра из задания:
+   #0F6B5F — основной зелёный (шапка, выбранные radio, +7)
+   #F2A93B — оранжевый (кнопка Find trains)
+   #16302B — тёмный текст
+   #F4F7F5 — фон полей
+   #E6EFEC — фон страницы и рамки полей
+   ========================================================= */
+:root {
+  --t1-green: #0F6B5F;
+  --t1-orange: #F2A93B;
+  --t1-dark: #16302B;
+  --t1-field: #F4F7F5;
+  --t1-line: #E6EFEC;
+}
+
+/* Шрифт Montserrat для всей страницы.
+   input, select, button берут шрифт от body (в Bootstrap у них font-family: inherit) */
+.t1-page {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--t1-line);
+  color: var(--t1-dark);
+}
+
+/* ---------- Карточка: скругления + тень ---------- */
+.t1-card {
+  border: 0;
+  border-radius: 28px;
+  overflow: hidden;                      /* обрезает углы зелёной шапки */
+  box-shadow: 0 20px 50px rgba(22, 48, 43, 0.15);
+}
+
+.t1-header {
+  background-color: var(--t1-green);
+  color: #fff;
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  margin: 0;
+  padding: 1.5rem 1.25rem;
+  border-bottom: 0;
+}
+
+.t1-body {
+  padding: 1.5rem 1.25rem 1.75rem;
+}
+
+/* На экранах от 768px больше внутренних отступов, как в макете для ноутбука */
+@media (min-width: 768px) {
+  .t1-header { padding: 2rem 2.5rem; }
+  .t1-body   { padding: 3rem 3rem 3rem; }
+}
+
+/* ---------- Подписи полей ---------- */
+.t1-label {
+  font-weight: 600;
+  color: var(--t1-dark);
+}
+
+/* ---------- Переключатель One way / Round trip ---------- */
+.t1-trip .t1-trip-btn {
+  border: 2px solid var(--t1-green);
+  color: var(--t1-green);
+  background-color: #fff;
+  font-weight: 600;
+  padding: 0.7rem 1.75rem;
+}
+
+/* Скругляем только внешние углы группы, как "таблетка" */
+.t1-trip .t1-trip-btn:first-of-type { border-radius: 50rem 0 0 50rem; }
+.t1-trip .t1-trip-btn:last-of-type  { border-radius: 0 50rem 50rem 0; }
+
+/* Выбранный вариант: + — соседний селектор (label сразу после input) */
+.t1-trip .btn-check:checked + .t1-trip-btn {
+  background-color: var(--t1-green);
+  border-color: var(--t1-green);
+  color: #fff;
+}
+
+/* Видимая рамка фокуса при работе с клавиатуры */
+.t1-trip .btn-check:focus-visible + .t1-trip-btn {
+  box-shadow: 0 0 0 0.25rem rgba(15, 107, 95, 0.35);
+}
+
+/* ---------- Поля ввода ---------- */
+.t1-control {
+  background-color: var(--t1-field);
+  border: 1px solid var(--t1-line);
+  border-radius: 14px;
+  color: var(--t1-dark);
+  padding: 0.75rem 1rem;
+}
+
+.t1-control:focus {
+  background-color: var(--t1-field);
+  border-color: var(--t1-green);
+  box-shadow: 0 0 0 0.25rem rgba(15, 107, 95, 0.2);
+}
+
+/* Floating label: цвет маленькой подписи From / To */
+.form-floating > .t1-control {
+  padding-left: 1rem;
+}
+.form-floating > label {
+  padding-left: 1rem;
+  color: #5b6b67;
+}
+.form-floating > .t1-control:focus ~ label,
+.form-floating > .t1-control:not(:placeholder-shown) ~ label {
+  color: #5b6b67;
+}
+/* Убираем белую "подложку" за подписью в Bootstrap 5.3 */
+.form-floating > .t1-control ~ label::after {
+  background-color: transparent !important;
+}
+
+/* Префикс +7 в input-group */
+.t1-prefix {
+  background-color: var(--t1-green);
+  border-color: var(--t1-green);
+  color: #fff;
+  font-weight: 700;
+  border-radius: 14px 0 0 14px;
+  padding: 0 1.1rem;
+}
+/* Внутри input-group поле скруглено только справа */
+.input-group > .t1-control {
+  border-radius: 0 14px 14px 0;
+}
+
+/* ---------- Radio, checkbox, switch в цветах макета ---------- */
+.t1-page .form-check-input:checked {
+  background-color: var(--t1-green);
+  border-color: var(--t1-green);
+}
+.t1-page .form-check-input:focus {
+  border-color: var(--t1-green);
+  box-shadow: 0 0 0 0.25rem rgba(15, 107, 95, 0.25);
+}
+/* У Bootstrap кружок у switch при фокусе синий — делаем зелёным */
+.t1-page .form-switch .form-check-input:focus:not(:checked) {
+  --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%230F6B5F'/%3e%3c/svg%3e");
+}
+
+/* ---------- Кнопки-таблетки ---------- */
+.t1-btn {
+  border-radius: 50rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 0.8rem 2rem;
+}
+
+.t1-btn-find {
+  background-color: var(--t1-orange);
+  border: 2px solid var(--t1-orange);
+  color: var(--t1-dark);
+}
+.t1-btn-find:hover,
+.t1-btn-find:focus-visible {
+  background-color: #e0962a;
+  border-color: #e0962a;
+  color: var(--t1-dark);
+}
+
+.t1-btn-clear {
+  background-color: #fff;
+  border: 2px solid var(--t1-dark);
+  color: var(--t1-dark);
+}
+.t1-btn-clear:hover,
+.t1-btn-clear:focus-visible {
+  background-color: var(--t1-dark);
+  color: #fff;
+}
+
+.t1-btn:focus-visible {
+  box-shadow: 0 0 0 0.25rem rgba(15, 107, 95, 0.35);
+}

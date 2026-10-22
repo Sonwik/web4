@@ -1,0 +1,54 @@
+/* =========================================================
+   TASK 2 — AITU Hack 2026 (только HTML-валидация)
+   :user-invalid срабатывает ТОЛЬКО после того, как пользователь
+   изменил поле и ушёл с него (или нажал Register).
+   Поэтому при открытии страницы красных полей нет.
+   ========================================================= */
+.t2-page {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f4f7f5;
+}
+
+.t2-card {
+  border: 0;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- Ошибка: красная рамка ---------- */
+.t2-form .form-control:user-invalid,
+.t2-form .form-select:user-invalid,
+.t2-form .form-check-input:user-invalid {
+  border-color: var(--bs-form-invalid-border-color);
+}
+
+.t2-form .form-control:user-invalid:focus,
+.t2-form .form-select:user-invalid:focus {
+  box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+}
+
+/* Подпись radio / checkbox тоже красная */
+.t2-form .form-check-input:user-invalid ~ .form-check-label {
+  color: var(--bs-form-invalid-color);
+}
+
+/* ---------- Ошибка: показать текст .invalid-feedback ----------
+   Bootstrap прячет .invalid-feedback (display: none).
+   ~ = "любой следующий сосед" после поля с ошибкой */
+.t2-form .form-control:user-invalid ~ .invalid-feedback,
+.t2-form .form-select:user-invalid ~ .invalid-feedback,
+.t2-form .form-check-input:user-invalid ~ .invalid-feedback {
+  display: block;
+}
+
+/* У группы radio текст ошибки лежит не рядом с input, а в fieldset.
+   :has() = "fieldset, внутри которого есть поле с ошибкой" */
+.t2-form .t2-group:has(:user-invalid) > .invalid-feedback {
+  display: block;
+}
+
+/* ---------- Правильное значение: зелёная рамка ---------- */
+.t2-form .form-control:user-valid,
+.t2-form .form-select:user-valid {
+  border-color: var(--bs-form-valid-border-color);
+}
